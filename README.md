@@ -67,7 +67,13 @@ Perfect! The check riddle tool confirms that your answer is correct!
 🎉 Congratulations! Your answer "an egg" is indeed the right solution to the riddle "What has to be broken before you can use it?"
 ```
 
-## From Source
+## Get started
+
+1. Follow the local development instructions below to build and inspect the MCP server
+2. Replace the tools with your own
+3. Deploy your MCP server with `fly launch`
+
+## Local Development
 
 ### Prerequisites
 
@@ -81,15 +87,17 @@ Perfect! The check riddle tool confirms that your answer is correct!
 yarn install
 ```
 
+### Add your NWC connection
+
+Copy `.env.example` to `.env` and update your NWC connection secret.
+
+> Don't have one yet? check out [Alby Hub](https://albyhub.com)
+
 ### Building
 
 ```bash
 yarn build
 ```
-
-### Add your NWC connection
-
-Copy `.env.example` to `.env` and update your NWC connection secret
 
 ### Inspect the tools (use/test without an LLM)
 
