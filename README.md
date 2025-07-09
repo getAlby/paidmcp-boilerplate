@@ -1,18 +1,12 @@
 # Boilerplate Paid MCP Server
 
-An example paid MCP server using [PaidMCP](https://github.com/getAlby/paidmcp)
-
-This MCP server uses the [official MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
+An example paid MCP server using [PaidMCP](https://github.com/getAlby/paidmcp) and the [official MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
 
 This MCP server is designed to be used in combination with [Alby Bitcoin Payments MCP Server](https://github.com/getAlby/mcp) or another MCP Server that can make lightning payments.
 
-## Why use PaidMCP
-
-Instead of using the [Cloudflare Stripe MCP Boilerplate](https://github.com/iannuttall/mcp-boilerplate), accept payments easily from anyone in the world.
-
 ## Tools
 
-This boilerplate MCP server has 2 tools.
+This boilerplate MCP server has 2 tools:
 
 - `ask_riddle` is a free tool that returns a riddle
 - `check_riddle` requires a payment of 21 sats to check your answer to a riddle
