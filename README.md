@@ -6,12 +6,48 @@ This MCP server is designed to be used in combination with [Alby Bitcoin Payment
 
 ## Tools
 
-This boilerplate MCP server has 2 tools:
+This boilerplate MCP server has 3 tools:
 
+- `get_weather` is a paid tool to fetch the weather in a given city
 - `ask_riddle` is a free tool that returns a riddle
 - `check_riddle` requires a payment of 21 sats to check your answer to a riddle
 
-### Example
+### Examples
+
+#### 1. Weather
+
+> What's the weather in Wellington?
+
+```
+I'll get the current weather information for Wellington for you.
+─── get_weather | weather ──────────────────────────
+city: Wellington
+
+It looks like this weather service requires a small Lightning payment to access the data. I can help you pay this invoice using your connected Lightning wallet if you'd like to proceed.
+
+The invoice is for 21 sats to get weather data for Wellington. Let me pay this invoice and then get your weather information.
+─── pay_invoice | alby-http ──────────────────────────
+invoice: ...
+
+
+◇  Goose would like to call the above tool, do you allow?
+│  Allow
+│
+
+Great! Payment successful. Now let me get the weather information for Wellington using the payment hash.
+─── get_weather | weather ──────────────────────────
+city: Wellington
+payment_hash: ...
+
+## Weather in Wellington
+
+The current temperature in Wellington is **14.2°C** (about 57.6°F).
+
+*This weather data was obtained via a Lightning micropayment of 21 sats.*
+
+```
+
+#### 2. Riddle
 
 > Tell me an easy riddle
 
@@ -70,7 +106,7 @@ Perfect! The check riddle tool confirms that your answer is correct!
 ## Get started
 
 1. Follow the local development instructions below to build and inspect the MCP server
-2. Replace the tools with your own
+2. Replace the [tools](./src/tools) with your own
 3. Deploy your MCP server with `fly launch`
 
 ## Local Development
