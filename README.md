@@ -9,8 +9,8 @@ This MCP server is designed to be used in combination with [Alby Bitcoin Payment
 This boilerplate MCP server has 3 tools:
 
 - `get_weather` is a paid tool to fetch the weather in a given city
-- `ask_riddle` is a free tool that returns a riddle
-- `check_riddle` requires a payment of 21 sats to check your answer to a riddle
+- `get_food_delivery_menu` is a free tool that returns food items that can be purchased
+- `order_food_delivery` order one or more items from the menu
 
 ### Examples
 
@@ -47,60 +47,82 @@ The current temperature in Wellington is **14.2°C** (about 57.6°F).
 
 ```
 
-#### 2. Riddle
+#### 2. Food Delivery
 
-> Tell me an easy riddle
+> Order me 2 pizzas
 
 ```
-boilerplate_paid_mcp ask_riddle
+The user wants to order 2 pizzas. Looking at the environment details, I can see this is a boilerplate MCP project with food delivery functionality. I can see there are food delivery tools available:
+
+food_delivery_menu.ts
+food_delivery_order.ts
+I also notice there's a boilerplate_paid_mcp MCP server connected that has food delivery tools available:
+
+food_delivery_menu: Shows the food delivery menu items available for purchase
+food_delivery_order: Order food delivery of one or more items
+To order pizzas, I should:
+
+First check the menu to see what pizza options are available
+Then place an order for 2 pizzas
+Let me start by checking the menu to see what's available.
+
+I'll help you order 2 pizzas. Let me first check the food delivery menu to see what pizza options are available.
+
+─── boilerplate_paid_mcp | get_food_delivery_menu ──────────────────────────
+
+{}
+
+Perfect! I can see there's Pizza available on the menu for 21 sats each. Now I'll place an order for 2 pizzas.
+
+─── boilerplate_paid_mcp | order_food_delivery ──────────────────────────
+
+Order food delivery of one or more items
 {
-  "tone": "easy"
+  "menu_items": [
+    {
+      "title": "Pizza"
+    },
+    {
+      "title": "Pizza"
+    }
+  ]
 }
 
--->
+The food delivery service requires payment before completing the order. I need to pay the lightning invoice first. Let me pay the invoice for 42 sats (21 sats × 2 pizzas) using the Alby MCP server.
 
-Here's an easy riddle for you:
 
-What has to be broken before you can use it?
+─── alby_mcp | pay_invoice ──────────────────────────
 
-Take your time thinking about it! When you're ready with your answer, let me know and I can check if you got it right.
-```
-
-> an egg
-
-```
-boilerplate_paid_mcp check_riddle
 {
-  "riddle": "What has to be broken before you can use it?",
-  "answer": "an egg"
+  "invoice": "lnbc420n1p58vggudpyfaexgetjypnx7u3q2p5h57np9ss9q6t60fssnp4q228a2ztxkwzaypvzrsh823qngmv97f2v9puwvtsadetypmutyscwpp53jg4mzq70r7gj75wu0scphy3h46df8t9ehjfs5ae4w4wfm93fwgssp5a4pus38dey8e5mqw0y6cyn6gce9w3yq2gpn52cha636fzll29xrq9qyysgqcqpcxqyz5vqlg4ess44vklv7a3tsl59tuh29jz6g55dp5hg0dwnsfhg47p4g02nyzmlaawul8mscspgqkz00radh94kk7m0nn3a84x22yhree8s42qqe95prr"
 }
--->
 
-I see that checking your answer requires a Lightning payment! The riddle checking service is asking for a payment of 21 sats to verify your answer.
-```
+Great! The payment was successful with no fees. Now I'll complete the pizza order by providing the payment hash.
 
-```
-alby_mcp pay_invoice
+─── boilerplate_paid_mcp | order_food_delivery ──────────────────────────
+
 {
-  "invoice": "lnbc210n1p5xayredpggd5x2cmtypexjeryd3jjqctwwdmk2unpdcsx2em8np4q228a2ztxkwzaypvzrsh823qngmv97f2v9puwvtsadetypmutyscwpp5zqyd4rc55l9yux0qeau7plcjzp9ezyn695ld625jvwqxwa0c6d4qsp53cps0ra8qem9yswlr5unm0auuc3hlr8jmqsj48umcp3ayt4mastq9qyysgqcqpcxqyz5vqkxa73dcw49cckqcrh3kndnjhu4p2p8hyzvf0ymmvc3m4vtn6dp0sxcptmrqnd46ruau8k4pu3sg8yrz3yx608cxsfngv70hzxx00gggqw84ryn"
+  "menu_items": [
+    {
+      "title": "Pizza"
+    },
+    {
+      "title": "Pizza"
+    }
+  ],
+  "payment_hash": "8c915d881e78fc897a8ee3e180dc91bd74d49d65cde49853b9abaae4ecb14b91"
 }
--->
 
-Great! The payment was successful. Now let me check your riddle answer using the check riddle tool with the payment hash.
-```
+Task Completed
+Your order for 2 pizzas has been successfully placed!
 
-```
-boilerplate_paid_mcp check_riddle
-{
-  "riddle": "What has to be broken before you can use it?",
-  "answer": "an egg",
-  "payment_hash": "1008da8f14a7ca4e19e0cf79e0ff12104b91127a2d3edd2a9263806775f8d36a"
-}
--->
+Order details:
 
-Perfect! The check riddle tool confirms that your answer is correct!
-
-🎉 Congratulations! Your answer "an egg" is indeed the right solution to the riddle "What has to be broken before you can use it?"
+Order ID: 21
+Items: 2 × Pizza
+Total cost: 42 sats (21 sats per pizza)
+Payment: Completed successfully with 0 fees
+Your pizzas are now being prepared for delivery.
 ```
 
 ## Get started

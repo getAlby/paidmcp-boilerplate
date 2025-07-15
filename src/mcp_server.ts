@@ -1,8 +1,8 @@
 import { MemoryStorage, PaidMcpServer } from "@getalby/paidmcp";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { registerAskRiddleTool } from "./tools/ask_riddle.js";
-import { registerCheckRiddleTool } from "./tools/check_riddle.js";
 import { registerGetWeatherTool } from "./tools/get_weather.js";
+import { registerGetFoodDeliveryMenuTool } from "./tools/get_food_delivery_menu.js";
+import { registerOrderFoodDeliveryTool } from "./tools/order_food_delivery.js";
 
 const storage = new MemoryStorage();
 
@@ -20,9 +20,9 @@ export function createMcpServer(): McpServer {
     { nwcUrl: process.env.NWC_CONNECTION_STRING, storage }
   );
 
+  registerGetFoodDeliveryMenuTool(server);
+  registerOrderFoodDeliveryTool(server);
   registerGetWeatherTool(server);
-  registerAskRiddleTool(server);
-  registerCheckRiddleTool(server);
 
   return server;
 }
