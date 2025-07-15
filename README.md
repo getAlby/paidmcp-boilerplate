@@ -151,6 +151,8 @@ Add to your MCP server list and update the `args` and `env`:
 }
 ```
 
+> Also it's recommended to install [Alby MCP](https://github.com/getalby/mcp) to test making payments.
+
 ### Building
 
 ```bash
