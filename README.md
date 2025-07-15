@@ -129,6 +129,28 @@ Copy `.env.example` to `.env` and update your NWC connection secret.
 
 > Don't have one yet? check out [Alby Hub](https://albyhub.com)
 
+### Configure in Roo code
+
+Add to your MCP server list and update the `args` and `env`:
+
+```json
+{
+  "mcpServers": {
+    "boilerplate_paid_mcp": {
+      "command": "node",
+      "args": ["/YOUR_PATH_TO_REPOSITORY/boilerplate-paid-mcp/build/index.js"],
+      "env": {
+        "NWC_CONNECTION_STRING": "nostr+walletconnect://..."
+      },
+      "disabled": false,
+      "autoApprove": [],
+      "alwaysAllow": [],
+      "disabledTools": []
+    }
+  }
+}
+```
+
 ### Building
 
 ```bash
